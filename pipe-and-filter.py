@@ -29,6 +29,8 @@ def filter_1(url):
 def filter_2(code, url):
     try:
         csv_file = pd.read_csv(f"{code}.csv")
+        csv_file['Date'] = pd.to_datetime(csv_file['Date'], dayfirst=True)
+        last_date = csv_file['Date'].max().strftime('%d/%m/%Y')
     except FileNotFoundError:
         browser = webdriver.Chrome()
         browser.get(url)
@@ -75,7 +77,10 @@ def filter_2(code, url):
         csv_file = df.to_csv(f'{code}.csv', index=False, float_format='%.2f')
 
     csv_file['Date'] = pd.to_datetime(csv_file['Date'], dayfirst=True)
-    return code, csv_file['Date'].max().strftime('%d/%m/%Y')
+    last_date = csv_file['Date'].max().strftime('%d/%m/%Y')
+
+
+    return code, last_date
 
 
 def filter_3(code, lastDate):
