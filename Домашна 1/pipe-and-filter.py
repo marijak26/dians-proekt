@@ -1,5 +1,4 @@
 import concurrent.futures
-import threading
 import time
 from datetime import datetime, timedelta
 
@@ -130,6 +129,10 @@ def extract_data(browser):
         rows = body.select('tr')
 
         for row in rows:
+            promet = row.select_one('td:nth-child(8)').text
+            if promet is None or promet == 0 or promet == "0":
+                continue
+            promet = format_numbers(promet)
             date = row.select_one('td:nth-child(1)').text
             date = datetime.strptime(date, '%m/%d/%Y').strftime('%d.%m.%Y')
             cena_na_posledna_transakcija = format_numbers(row.select_one('td:nth-child(2)').text)
@@ -138,7 +141,6 @@ def extract_data(browser):
             prosecna_cena = format_numbers(row.select_one('td:nth-child(5)').text)
             prom = format_numbers(row.select_one('td:nth-child(6)').text)
             kolicina = format_numbers(row.select_one('td:nth-child(7)').text)
-            promet = format_numbers(row.select_one('td:nth-child(8)').text)
             vkupen_promet = format_numbers(row.select_one('td:nth-child(9)').text)
             list.append({'Date': date, 'Price of last transaction': cena_na_posledna_transakcija,
                          'Max': mak, 'Min': min, 'Average price': prosecna_cena,
