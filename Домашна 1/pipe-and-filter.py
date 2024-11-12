@@ -18,17 +18,16 @@ class Pipe:
         options = webdriver.ChromeOptions()
         options.add_argument("--headless")
         browser = webdriver.Chrome(options=options)
-        browser.get('https://www.mse.mk/en/stats/symbolhistory/kmb')
+        browser.get('https://www.mse.mk/en/stats/current-schedule')
         source = browser.page_source
         soup = BeautifulSoup(source, 'html.parser')
         all_codes = []
-        codes = soup.select('#Code')
+        codes = soup.select('tr td:nth-child(1) a')
 
         for code in codes:
-            all_codes.append(code.text.split('\n'))
-        all_codes = all_codes[0]
-        all_codes = [code for code in all_codes if code.isalpha()]
-
+            code = code.text.split('\n')[0]
+            if code.isalpha():
+                all_codes.append(code)
         browser.quit()
 
         return all_codes
@@ -87,9 +86,8 @@ class Pipe:
 
             data = extract_data(browser)
             if data is not None:
-                df = data
                 existing_df = pd.read_csv(f'data/{code}.csv')
-                existing_df = pd.concat([df, existing_df], ignore_index=True)
+                existing_df = pd.concat([data, existing_df], ignore_index=True)
                 existing_df = existing_df.drop_duplicates(subset='Date')
                 existing_df.to_csv(f'data/{code}.csv', index=False)
 
@@ -152,8 +150,6 @@ def extract_data(browser):
 
 
 def format_numbers(number):
-    if number is None:
-        return number
     number = number.replace(",", "#")
     number = number.replace(".", ",")
     return number.replace("#", ".")
