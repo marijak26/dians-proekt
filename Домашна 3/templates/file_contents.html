@@ -61,6 +61,10 @@
 </head>
 <body onload="showTab('daily')">
     <h1>Data for {{ filename }}</h1>
+     <div class="classification">
+        <h3>Sentiment Analysis</h3>
+        <p><strong>Decision based on sentiment analysis: </strong>{{ classification }}</p>
+    </div>
     <div class="tabs">
         <button data-tab="daily" onclick="showTab('daily')" class="active">Daily</button>
         <button data-tab="weekly" onclick="showTab('weekly')">Weekly</button>

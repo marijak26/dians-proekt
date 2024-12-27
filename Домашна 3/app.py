@@ -1,12 +1,23 @@
 import os
 import pandas as pd
 import numpy as np
-from flask import Flask, render_template, request
+from flask import Flask, render_template
 import ta
+import nltk
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+from translate import Translator
+import pdfplumber
+import pytesseract
 
 app = Flask(__name__)
 
 DATA_FOLDER = 'data'
+REPORTS_FOLDER = 'financial_reports'
+
+pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+
+nltk.download('vader_lexicon')
+sia = SentimentIntensityAnalyzer()
 
 def clean_data(file_path):
     df = pd.read_csv(file_path)
@@ -51,6 +62,71 @@ def resample_data(df, timeframe):
     }).dropna().reset_index()
     return df
 
+def translate_text(text):
+    translator = Translator(to_lang='en', from_lang='mk')
+    chunks = chunk_text(text)
+
+    translated_chunks = []
+    for chunk in chunks:
+        translated_chunk = translator.translate(chunk)
+        translated_chunks.append(translated_chunk)
+
+    translated_text = " ".join(translated_chunks)
+    return translated_text
+
+
+def chunk_text(text, max_length=500):
+    return [text[i:i + max_length] for i in range(0, len(text), max_length)]
+
+
+def extract_text_from_pdf(pdf_path):
+    with pdfplumber.open(pdf_path) as pdf:
+        text = ""
+        for page in pdf.pages:
+            text += page.extract_text()
+    return text
+
+
+def extract_text_from_image_pdf(pdf_path):
+    with pdfplumber.open(pdf_path) as pdf:
+        text = ""
+        for page in pdf.pages:
+            image = page.to_image()
+            text += pytesseract.image_to_string(image.original, lang='mkd')
+    return text
+
+
+def analyze_sentiment(pdf_path):
+    try:
+        text = extract_text_from_pdf(pdf_path)
+        if not text.strip():
+            text = extract_text_from_image_pdf(pdf_path)
+
+        translated_text = translate_text(text)
+
+        sentiment = sia.polarity_scores(translated_text)
+        compound_score = sentiment['compound']
+        sentiment_classification = classify_sentiment(compound_score)
+
+        return sentiment_classification
+
+    except FileNotFoundError:
+        return "No financial reports from this year found."
+
+
+def classify_sentiment(compound_score):
+    if compound_score > 0.5:
+        return "Buy"
+    elif 0.2 <= compound_score <= 0.5:
+        return "Buy/Hold"
+    elif 0.0 <= compound_score < 0.2:
+        return "Hold"
+    elif -0.2 <= compound_score < 0.0:
+        return "Sell"
+    else:
+        return "Sell/Avoid"
+
+
 @app.route('/company/all')
 def list_files():
     try:
@@ -69,15 +145,19 @@ def display_file(filename):
         weekly_data = calculate_indicators(resample_data(df.copy(), 'W'))
         monthly_data = calculate_indicators(resample_data(df.copy(), 'M'))
 
+        classification = analyze_sentiment(f'{REPORTS_FOLDER}/{filename}_report.pdf')
+
         return render_template(
             'file_contents.html',
             filename=filename,
             daily_data=daily_data.to_html(classes='table table-bordered', index=False),
             weekly_data=weekly_data.to_html(classes='table table-bordered', index=False),
-            monthly_data=monthly_data.to_html(classes='table table-bordered', index=False)
+            monthly_data=monthly_data.to_html(classes='table table-bordered', index=False),
+            classification=classification
         )
     except FileNotFoundError:
         return f"File {filename} not found.", 404
+
 
 if __name__ == '__main__':
     app.run(debug=True)
