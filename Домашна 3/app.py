@@ -27,10 +27,13 @@ def clean_data(file_path):
         df[col] = pd.to_numeric(df[col].replace({',': '', '%': ''}, regex=True), errors='coerce')
     df['Date'] = pd.to_datetime(df['Date'], errors='coerce')
     df = df.dropna()
+
+    df = df.sort_values(by='Date', ascending=False)
+
     return df
 
 def calculate_indicators(df):
-    df = df.sort_values('Date')
+    df = df.sort_values(by='Date', ascending=False)
 
     df['SMA_10'] = df['Price of last transaction'].rolling(window=10).mean()
     df['SMA_50'] = df['Price of last transaction'].rolling(window=50).mean()
@@ -60,7 +63,42 @@ def resample_data(df, timeframe):
         '%chg.': 'mean',
         'Volume': 'sum'
     }).dropna().reset_index()
+
+    df = df.sort_values(by='Date', ascending=False)
+
     return df
+
+def plot_custom_chart(df, company_name):
+    fig = go.Figure()
+
+    fig.add_trace(go.Scatter(
+        x=df['Date'], y=df['Price of last transaction'],
+        mode='lines', name='Price', line=dict(color='blue')
+    ))
+
+    fig.add_trace(go.Scatter(
+        x=df['Date'], y=df['SMA_10'],
+        mode='lines', name='SMA 10', line=dict(color='orange')
+    ))
+    fig.add_trace(go.Scatter(
+        x=df['Date'], y=df['EMA_10'],
+        mode='lines', name='EMA 10', line=dict(color='green')
+    ))
+
+    fig.add_trace(go.Scatter(
+        x=df['Date'], y=df['RSI'],
+        mode='lines', name='RSI', line=dict(color='red', dash='dot')
+    ))
+
+    fig.update_layout(
+        title=f"{company_name} Stock Data with Indicators",
+        xaxis=dict(title='Date'),
+        yaxis=dict(title='Price'),
+        legend=dict(orientation="h", x=0, y=-0.2),
+        template="plotly_white"
+    )
+
+    return fig.to_html(full_html=False)
 
 def translate_text(text):
     translator = Translator(to_lang='en', from_lang='mk')
@@ -145,6 +183,7 @@ def display_file(filename):
         weekly_data = calculate_indicators(resample_data(df.copy(), 'W'))
         monthly_data = calculate_indicators(resample_data(df.copy(), 'M'))
 
+        chart_html = plot_custom_chart(daily_data, filename)
         classification = analyze_sentiment(f'{REPORTS_FOLDER}/{filename}_report.pdf')
 
         return render_template(
@@ -153,6 +192,7 @@ def display_file(filename):
             daily_data=daily_data.to_html(classes='table table-bordered', index=False),
             weekly_data=weekly_data.to_html(classes='table table-bordered', index=False),
             monthly_data=monthly_data.to_html(classes='table table-bordered', index=False),
+            chart_html=chart_html,
             classification=classification
         )
     except FileNotFoundError:
