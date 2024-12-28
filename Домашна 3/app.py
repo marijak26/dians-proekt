@@ -9,6 +9,11 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from translate import Translator
 import pdfplumber
 import pytesseract
+from sklearn.preprocessing import MinMaxScaler
+from keras.api.models import Sequential
+from keras.api.layers import LSTM, Dense, Dropout
+from sklearn.metrics import mean_squared_error
+import matplotlib.pyplot as plt
 
 app = Flask(__name__)
 
@@ -237,6 +242,129 @@ def display_file(filename):
         )
     except FileNotFoundError:
         return f"File {filename} not found.", 404
+
+
+def prepare_data_for_lstm(df, feature_col='Price of last transaction', time_steps=30):
+    try:
+        if feature_col not in df.columns:
+            raise ValueError(f"Feature column '{feature_col}' not found in DataFrame.")
+
+        data = df[feature_col].values.reshape(-1, 1)
+        scaler = MinMaxScaler(feature_range=(0, 1))
+        scaled_data = scaler.fit_transform(data)
+
+        if len(scaled_data) <= time_steps:
+            raise ValueError(f"Not enough data to create sequences with {time_steps} time steps.")
+
+        X, y = [], []
+        for i in range(time_steps, len(scaled_data)):
+            X.append(scaled_data[i - time_steps:i, 0])
+            y.append(scaled_data[i, 0])
+
+        X = np.array(X)
+        y = np.array(y)
+        X = np.reshape(X, (X.shape[0], X.shape[1], 1))
+
+        return X, y, scaler
+    except Exception as e:
+        print(f"Error in prepare_data_for_lstm: {e}")
+        return None, None, None
+
+
+
+def train_lstm_model(X_train, y_train, X_val, y_val, epochs=50, batch_size=32):
+    try:
+        model = Sequential([
+            LSTM(units=50, return_sequences=True, input_shape=(X_train.shape[1], 1)),
+            LSTM(units=50, return_sequences=False),
+            Dense(units=25),
+            Dense(units=1)
+        ])
+
+        model.compile(optimizer='adam', loss='mean_squared_error')
+        history = model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs=epochs, batch_size=batch_size,
+                            verbose=1)
+
+        return model, history
+    except Exception as e:
+        print(f"Error during LSTM model training: {e}")
+        return None, None
+
+
+def forecast_with_lstm(model, X_test, scaler, df, feature_col='Price of last transaction', time_steps=30):
+    try:
+        predictions = model.predict(X_test)
+        predictions = scaler.inverse_transform(predictions)
+
+        actual_data = df[feature_col].values[-len(predictions):].reshape(-1, 1)
+        mse = mean_squared_error(actual_data, predictions)
+
+        fig = go.Figure()
+
+        fig.add_trace(go.Scatter(
+            x=np.arange(len(actual_data)), y=actual_data.flatten(),
+            mode='lines', name='Actual Prices', line=dict(color='blue')
+        ))
+
+        fig.add_trace(go.Scatter(
+            x=np.arange(len(predictions)), y=predictions.flatten(),
+            mode='lines', name='Predicted Prices', line=dict(color='red')
+        ))
+
+        fig.update_layout(
+            title='Stock Price Prediction with LSTM',
+            xaxis=dict(title='Time'),
+            yaxis=dict(title='Price'),
+            legend=dict(orientation="h", x=0, y=-0.2),
+            template="plotly_white"
+        )
+
+        chart_html = fig.to_html(full_html=False)
+
+        print(f"Mean Squared Error (MSE): {mse}")
+
+        return chart_html, mse
+    except Exception as e:
+        print(f"Error during forecasting: {e}")
+        return None, None
+
+
+@app.route('/lstm/<filename>')
+def lstm_prediction(filename):
+    try:
+        file_path = os.path.join(DATA_FOLDER, filename + ".csv")
+        df = clean_data(file_path)
+
+        if df.empty:
+            return f"No valid data found for {filename}.", 404
+
+        time_steps = 30
+        X, y, scaler = prepare_data_for_lstm(df, time_steps=time_steps)
+
+        if X is None or y is None:
+            return f"Error preparing data for LSTM model for {filename}.", 500
+
+        train_size = int(len(X) * 0.7)
+        X_train, y_train = X[:train_size], y[:train_size]
+        X_val, y_val = X[train_size:], y[train_size:]
+
+        if len(X_train) == 0 or len(X_val) == 0:
+            return f"Insufficient data to train/test the LSTM model for {filename}.", 500
+
+        model, history = train_lstm_model(X_train, y_train, X_val, y_val)
+
+        chart_html, mse = forecast_with_lstm(model, X_val, scaler, df, time_steps=time_steps)
+
+        return render_template(
+            'lstm_results.html',
+            filename=filename,
+            chart_html=chart_html,
+            mse=mse
+        )
+    except Exception as e:
+        print(f"Error in LSTM prediction route: {e}")
+        return "Error occurred while processing LSTM prediction.", 500
+
 
 
 if __name__ == '__main__':
