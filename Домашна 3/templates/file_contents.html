@@ -84,28 +84,10 @@
     </div>
 
     <div class="chart-container">
-        <h2>Tesla Stock Chart</h2>
-        <div class="tradingview-widget-container">
-            <div id="tradingview_d48d6"></div>
-            <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
-            <script type="text/javascript">
-                new TradingView.widget({
-                    "width": "100%",
-                    "height": 400,
-                    "symbol": "NASDAQ:TSLA",
-                    "interval": "D",
-                    "timezone": "Etc/UTC",
-                    "theme": "light",
-                    "style": "1",
-                    "locale": "en",
-                    "toolbar_bg": "#f1f3f6",
-                    "enable_publishing": false,
-                    "allow_symbol_change": true,
-                    "container_id": "tradingview_d48d6"
-                });
-            </script>
-        </div>
+    <h2>{{ filename }} Stock Chart</h2>
+    {{ chart_html | safe }}
     </div>
+    
     <a href="/company/all">Back to file list</a>
 </body>
 </html>
