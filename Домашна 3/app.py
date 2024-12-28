@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 from flask import Flask, render_template
 import ta
+import plotly.graph_objects as go
 import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from translate import Translator
