@@ -6,14 +6,14 @@ import ta
 import plotly.graph_objects as go
 import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
+from sklearn.model_selection import train_test_split
 from translate import Translator
 import pdfplumber
 import pytesseract
 from sklearn.preprocessing import MinMaxScaler
 from keras.api.models import Sequential
-from keras.api.layers import LSTM, Dense, Dropout
-from sklearn.metrics import mean_squared_error
-import matplotlib.pyplot as plt
+from keras.api.layers import LSTM, Dense, Input, Dropout
+from sklearn.metrics import mean_squared_error, r2_score
 
 app = Flask(__name__)
 
@@ -39,7 +39,7 @@ def clean_data(file_path):
     numeric_columns = ['Price of last transaction', 'Max', 'Min', 'Average price', '%chg.']
     for col in numeric_columns:
         df[col] = pd.to_numeric(df[col].replace({',': '', '%': ''}, regex=True), errors='coerce')
-    df['Date'] = pd.to_datetime(df['Date'], errors='coerce')
+    df['Date'] = pd.to_datetime(df['Date'], errors='coerce', format="%d.%m.%Y")
     df = df.dropna()
 
     df = df.sort_values(by='Date', ascending=False)
@@ -244,46 +244,58 @@ def display_file(filename):
         return f"File {filename} not found.", 404
 
 
-def prepare_data_for_lstm(df, feature_col='Price of last transaction', time_steps=30):
+def prepare_data_for_lstm(df, time_steps, feature_col='Price of last transaction'):
     try:
         if feature_col not in df.columns:
             raise ValueError(f"Feature column '{feature_col}' not found in DataFrame.")
 
-        data = df[feature_col].values.reshape(-1, 1)
-        scaler = MinMaxScaler(feature_range=(0, 1))
-        scaled_data = scaler.fit_transform(data)
+        df.set_index(keys=["Date"], inplace=True)
+        df.sort_index(inplace=True)
 
-        if len(scaled_data) <= time_steps:
+        df = df[[feature_col]]
+        df = df.copy()
+
+        for i in range(1, time_steps + 1):
+            df.loc[:, f'lag_{i}'] = df[feature_col].shift(i)
+
+        df.dropna(axis=0, inplace=True)
+
+        X, y = df.drop(columns=feature_col, axis=1), df[feature_col]
+
+        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, shuffle=False)
+
+        scaler = MinMaxScaler()
+        X_train = scaler.fit_transform(X_train)
+        X_test = scaler.transform(X_test)
+
+        scaler = MinMaxScaler()
+        y_train = scaler.fit_transform(y_train.to_numpy().reshape(-1, 1))
+
+        X_train = X_train.reshape(X_train.shape[0], time_steps, (X_train.shape[1] // time_steps))
+        X_test = X_test.reshape(X_test.shape[0], time_steps, (X_test.shape[1] // time_steps))
+
+        if len(df) <= time_steps:
             raise ValueError(f"Not enough data to create sequences with {time_steps} time steps.")
 
-        X, y = [], []
-        for i in range(time_steps, len(scaled_data)):
-            X.append(scaled_data[i - time_steps:i, 0])
-            y.append(scaled_data[i, 0])
-
-        X = np.array(X)
-        y = np.array(y)
-        X = np.reshape(X, (X.shape[0], X.shape[1], 1))
-
-        return X, y, scaler
+        return X_train, y_train, X_test, y_test, scaler
     except Exception as e:
         print(f"Error in prepare_data_for_lstm: {e}")
-        return None, None, None
+        return None, None, None, None, None
 
 
-
-def train_lstm_model(X_train, y_train, X_val, y_val, epochs=50, batch_size=32):
+def train_lstm_model(X_train, y_train, epochs=50, batch_size=32):
     try:
         model = Sequential([
-            LSTM(units=50, return_sequences=True, input_shape=(X_train.shape[1], 1)),
-            LSTM(units=50, return_sequences=False),
-            Dense(units=25),
-            Dense(units=1)
+            Input((X_train.shape[1], X_train.shape[2],)),
+            LSTM(units=32, return_sequences=True, activation="relu"),
+            Dropout(0.2),
+            LSTM(units=8, return_sequences=False, activation="relu"),
+            Dense(units=1, activation="linear")
         ])
 
         model.compile(optimizer='adam', loss='mean_squared_error')
-        history = model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs=epochs, batch_size=batch_size,
-                            verbose=1)
+        history = model.fit(X_train, y_train, validation_split=0.2, epochs=epochs, batch_size=batch_size,
+                            verbose=1, shuffle=False)
 
         return model, history
     except Exception as e:
@@ -291,39 +303,39 @@ def train_lstm_model(X_train, y_train, X_val, y_val, epochs=50, batch_size=32):
         return None, None
 
 
-def forecast_with_lstm(model, X_test, scaler, df, feature_col='Price of last transaction', time_steps=30):
+def forecast_with_lstm(model, X_test, y_test, scaler, df):
     try:
         predictions = model.predict(X_test)
+        predictions = predictions.reshape(-1, 1)
         predictions = scaler.inverse_transform(predictions)
-
-        actual_data = df[feature_col].values[-len(predictions):].reshape(-1, 1)
+        actual_data = y_test
         mse = mean_squared_error(actual_data, predictions)
+        score = r2_score(actual_data, predictions)
+
+        x_values = df.index[-len(actual_data):]
 
         fig = go.Figure()
 
         fig.add_trace(go.Scatter(
-            x=np.arange(len(actual_data)), y=actual_data.flatten(),
+            x=x_values, y=actual_data,
             mode='lines', name='Actual Prices', line=dict(color='blue')
         ))
 
         fig.add_trace(go.Scatter(
-            x=np.arange(len(predictions)), y=predictions.flatten(),
-            mode='lines', name='Predicted Prices', line=dict(color='red')
+            x=x_values, y=predictions.flatten(),
+            mode='lines', name='Predicted Prices', line=dict(color='red', dash='dash')
         ))
 
         fig.update_layout(
-            title='Stock Price Prediction with LSTM',
-            xaxis=dict(title='Time'),
-            yaxis=dict(title='Price'),
-            legend=dict(orientation="h", x=0, y=-0.2),
+            title='Actual vs Predicted Prices',
+            xaxis_title='Date',
+            yaxis_title='Price',
             template="plotly_white"
         )
 
         chart_html = fig.to_html(full_html=False)
 
-        print(f"Mean Squared Error (MSE): {mse}")
-
-        return chart_html, mse
+        return chart_html, mse, score
     except Exception as e:
         print(f"Error during forecasting: {e}")
         return None, None
@@ -333,38 +345,32 @@ def forecast_with_lstm(model, X_test, scaler, df, feature_col='Price of last tra
 def lstm_prediction(filename):
     try:
         file_path = os.path.join(DATA_FOLDER, filename + ".csv")
+
         df = clean_data(file_path)
 
         if df.empty:
             return f"No valid data found for {filename}.", 404
 
-        time_steps = 30
-        X, y, scaler = prepare_data_for_lstm(df, time_steps=time_steps)
+        time_steps = 3
+        X_train, y_train, X_test, y_test, scaler = prepare_data_for_lstm(df, time_steps=time_steps)
 
-        if X is None or y is None:
+        if X_train is None or y_train is None:
             return f"Error preparing data for LSTM model for {filename}.", 500
 
-        train_size = int(len(X) * 0.7)
-        X_train, y_train = X[:train_size], y[:train_size]
-        X_val, y_val = X[train_size:], y[train_size:]
+        model, history = train_lstm_model(X_train, y_train)
 
-        if len(X_train) == 0 or len(X_val) == 0:
-            return f"Insufficient data to train/test the LSTM model for {filename}.", 500
-
-        model, history = train_lstm_model(X_train, y_train, X_val, y_val)
-
-        chart_html, mse = forecast_with_lstm(model, X_val, scaler, df, time_steps=time_steps)
+        chart_html, mse, score = forecast_with_lstm(model, X_test, y_test, scaler, df)
 
         return render_template(
             'lstm_results.html',
             filename=filename,
             chart_html=chart_html,
-            mse=mse
+            mse=mse,
+            score=score
         )
     except Exception as e:
         print(f"Error in LSTM prediction route: {e}")
         return "Error occurred while processing LSTM prediction.", 500
-
 
 
 if __name__ == '__main__':
