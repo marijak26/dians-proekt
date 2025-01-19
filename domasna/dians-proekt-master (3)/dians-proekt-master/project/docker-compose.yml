@@ -1,0 +1,76 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      - data-processing-service
+      - fundamental-analysis-service
+      - sentiment-analysis-service
+      - lstm-prediction-service
+      - scraping-service
+    networks:
+      - app_network
+
+  data-processing-service:
+    build:
+      context: ./data-processing-service
+      dockerfile: Dockerfile.data-processing-service
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./data:/app/data
+    networks:
+      - app_network
+
+  fundamental-analysis-service:
+    build:
+      context: ./fundamental-analysis-service
+      dockerfile: Dockerfile.fundamental-analysis-service
+    ports:
+      - "5002:5002"
+    networks:
+      - app_network
+
+
+  sentiment-analysis-service:
+    build:
+      context: ./sentiment-analysis-service
+      dockerfile: Dockerfile.sentiment-analysis-service
+    ports:
+      - "5003:5003"
+    volumes:
+      - ./financial_reports:/app/financial_reports
+    networks:
+      - app_network
+
+  lstm-prediction-service:
+    build:
+      context: ./lstm-prediction-service
+      dockerfile: Dockerfile.lstm-prediction-service
+    ports:
+      - "5004:5004"
+    volumes:
+      - ./data:/app/data
+    networks:
+      - app_network
+
+  scraping-service:
+    build:
+      context: ./scraping-service
+      dockerfile: Dockerfile.scraping-service
+    ports:
+      - "5005:5005"
+    volumes:
+      - ./data:/app/data
+    networks:
+      - app_network
+networks:
+  app_network:
+    driver: bridge
