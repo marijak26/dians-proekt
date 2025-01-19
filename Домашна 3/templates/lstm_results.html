@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LSTM Prediction Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .container {
+            margin-top: 20px;
+        }
+        .chart-container {
+            margin-top: 30px;
+            text-align: center;
+        }
+        p {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>LSTM Prediction Results for {{ filename }}</h1>
+    <div class="container">
+        <p>Below are the results from the LSTM prediction model based on historical stock prices.</p>
+
+        <div class="chart-container">
+            <h2>Prediction Chart</h2>
+            <div>{{ chart_html|safe }}</div>
+        </div>
+
+        <div class="metrics-container">
+            <h2>Metrics</h2>
+            <p>Mean Squared Error (MSE): {{ mse }}</p>
+            <p>r2_score: {{ score }}</p>
+        </div>
+    </div>
+    <a href="/company/all">Back to file list</a>
+</body>
+</html>

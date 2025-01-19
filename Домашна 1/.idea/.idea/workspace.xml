@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7cdbffaa-8d97-41d9-bd38-3570c977111c" name="Changes" comment="obraboteni podatoci">
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/ADIN.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/ALK.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/ALKB.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/AMEH.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/APTK.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/ATPP.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/AUMK.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/BANA.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Домашна 1/data/BANA.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/BGOR.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/BIKF.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/BIM.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/BLTU.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/CBNG.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/CDHV.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/CEVI.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/CKB.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/CKBKO.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/DEBA.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/DIMI.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/EDST.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/ELMA.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/ELNC.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/ENER.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/ENSA.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/EUHA.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/EUMK.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/EVRO.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/FAKM.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/FERS.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/FKTL.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/FROT.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/FUBT.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/GALE.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/GDKM.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/GECK.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/GECT.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/GIMS.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/GRDN.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/GRNT.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/GRSN.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/GRZD.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/GTC.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/GTRG.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/IJUG.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/INB.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/INHO.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/INOV.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/INPR.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/INTP.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/JAKO.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/JUSK.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/KARO.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/KDFO.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/KJUBI.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/KKST.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/KLST.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/KMB.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/KMPR.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/KOMU.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/KONF.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/KONZ.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/KORZ.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/KPSS.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/KULT.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/KVAS.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/LAJO.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/LHND.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/LOTO.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/LOZP.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/MAGP.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/MAKP.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/MAKS.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/MB.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/MERM.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/MKSD.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/MLKR.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/MODA.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/MPOL.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/MPT.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/MPTE.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/MTUR.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/MZHE.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/MZPU.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/NEME.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/NOSK.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/OBPP.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/OILK.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/OKTA.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/OMOS.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/OPFO.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/OPTK.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/ORAN.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/OSPO.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/OTEK.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/PELK.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/PGGV.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/PKB.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/POPK.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/PPIV.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/PROD.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/PROT.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/PTRS.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/RADE.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/REPL.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/RIMI.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/RINS.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/RZEK.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/RZIT.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/RZIZ.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/RZLE.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/RZLV.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/RZTK.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/RZUG.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/RZUS.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/SBT.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/SDOM.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/SIL.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/SKON.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/SKP.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/SLAV.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/SNBT.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/SNBTO.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/SOLN.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/SPAZ.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/SPAZP.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/SPOL.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/SSPR.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/STB.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/STBP.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/STIL.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/STOK.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/TAJM.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/TBKO.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/TEAL.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/TEHN.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/TEL.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/TETE.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/TIKV.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/TKPR.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/TKVS.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/TNB.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/TRDB.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/TRPS.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/TRUB.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/TSMP.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/TSZS.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/TTK.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/TTKO.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/UNI.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/USJE.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/VARG.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/VFPM.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/VITA.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/VROS.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/VSC.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/VTKS.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/ZAS.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/ZILU.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/ZILUP.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/ZIMS.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/ZKAR.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/ZPKO.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/ZPOG.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/data/ZUAS.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/Домашна 1/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/Домашна 1/pipe-and-filter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Домашна 1/Домашна 1/Документација за домашна 1.pdf" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/Домашна 1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="2oX03vXobRTRm1PANGPPg1bBPLX" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.pipe-and-filter.executor": "Run",
+    "Python.test.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/martinaa/Desktop/dians/dians-proekt/Домашна 1",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\martinaa\Desktop\dians\dians-proekt\Домашна 1" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-PY-241.14494.241" />
+        <option value="bundled-python-sdk-0509580d9d50-28c9f5db9ffe-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-241.14494.241" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7cdbffaa-8d97-41d9-bd38-3570c977111c" name="Changes" comment="" />
+      <created>1731000417250</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1731000417250</updated>
+      <workItem from="1731000418415" duration="10083000" />
+      <workItem from="1731010622756" duration="1875000" />
+      <workItem from="1731012560513" duration="6861000" />
+      <workItem from="1731019928713" duration="114000" />
+      <workItem from="1731020149475" duration="13227000" />
+      <workItem from="1731083899499" duration="12120000" />
+      <workItem from="1731098388699" duration="6238000" />
+      <workItem from="1731175068573" duration="2346000" />
+      <workItem from="1731177443814" duration="1675000" />
+      <workItem from="1731179710090" duration="187000" />
+    </task>
+    <task id="LOCAL-00001" summary="dodaden filter3 i nishki">
+      <option name="closed" value="true" />
+      <created>1731106224855</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1731106224855</updated>
+    </task>
+    <task id="LOCAL-00002" summary="obraboteni podatoci">
+      <option name="closed" value="true" />
+      <created>1731106543099</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1731106543099</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
+    <MESSAGE value="dodaden filter3 i nishki" />
+    <MESSAGE value="obraboteni podatoci" />
+    <option name="LAST_COMMIT_MESSAGE" value="obraboteni podatoci" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../../../../../Program Files/Python310/Lib/concurrent/futures/thread.py</url>
+          <line>72</line>
+          <option name="timeStamp" value="52" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/../../../../../Program Files/Python310/Lib/concurrent/futures/thread.py</url>
+          <line>107</line>
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/pipe_and_filter_py$pipe_and_filter.coverage" NAME="pipe-and-filter Coverage Results" MODIFIED="1731178729512" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Домашна 1" />
+    <SUITE FILE_PATH="coverage/pipe_and_filter_py$test.coverage" NAME="test Coverage Results" MODIFIED="1731085257405" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/dians_proekt$pipe_and_filter.coverage" NAME="pipe-and-filter Coverage Results" MODIFIED="1731010012549" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+  </component>
+</project>

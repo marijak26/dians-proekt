@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ filename }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .table, .table th, .table td {
+            border: 1px solid #ddd;
+        }
+        .table th, .table td {
+            padding: 10px;
+            text-align: left;
+        }
+        .table th {
+            background-color: #f4f4f4;
+        }
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .tabs button {
+            padding: 10px;
+            background: #f4f4f4;
+            border: none;
+            cursor: pointer;
+        }
+        .tabs button.active {
+            background: #0066cc;
+            color: white;
+        }
+        .chart-container {
+            margin-top: 30px;
+        }
+        div {
+            margin-bottom: 10px;
+        }
+    </style>
+    <script>
+        function showTab(tabName) {
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.style.display = 'none');
+
+            document.getElementById(tabName).style.display = 'block';
+            const buttons = document.querySelectorAll('.tabs button');
+            buttons.forEach(button => button.classList.remove('active'));
+
+            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+        }
+    </script>
+</head>
+<body onload="showTab('daily')">
+    <h1>Data for {{ filename }}</h1>
+     <div class="classification">
+        <h2>Sentiment Analysis</h2>
+         <p>Decision based on sentiment analysis: <strong>{{ classification }}</strong></p>
+    </div>
+        <div>
+        <h2>Forecast and Prediction</h2>
+        <p>Click the link below to see the LSTM prediction results for this company:</p>
+        <a href="/lstm/{{ filename }}">Go to LSTM Prediction</a>
+    </div>
+    <div class="chart-container">
+    <h2>{{ filename }} Stock Chart</h2>
+    {{ chart_html | safe }}
+    </div>
+
+    <div class="tabs">
+        <button data-tab="daily" onclick="showTab('daily')" class="active">Daily</button>
+        <button data-tab="weekly" onclick="showTab('weekly')">Weekly</button>
+        <button data-tab="monthly" onclick="showTab('monthly')">Monthly</button>
+    </div>
+    <div id="daily" class="tab-content">
+        <h2>Daily Data</h2>
+        {{ daily_data | safe }}
+    </div>
+    <div id="weekly" class="tab-content" style="display:none;">
+        <h2>Weekly Data</h2>
+        {{ weekly_data | safe }}
+    </div>
+    <div id="monthly" class="tab-content" style="display:none;">
+        <h2>Monthly Data</h2>
+        {{ monthly_data | safe }}
+    </div>
+    <a href="/company/all">Back to file list</a>
+</body>
+</html>
